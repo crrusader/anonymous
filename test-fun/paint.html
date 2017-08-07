@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+        	*{
+        		padding: 0;
+        		margin: 0;
+        	}
+        	body{
+				background-color: grey;
+        	}
+        </style>
+    </head>
+    <body>
+    	<canvas id="cv"></canvas>
+    	<script>
+    		var cv = document.querySelector('#cv');
+    		cv.width=600;
+    		cv.height=400;
+    		cv.style.backgroundColor='white';
+    		var ctx = cv.getContext("2d");
+    	
+    		cv.onmousedown=function(){
+    			cv.onmousemove=function(e){
+    				var x = e.pageX;
+    				var y = e.pageY;
+    				console.log(x);
+    				ctx.lineTo(x,y);
+    				ctx.stroke();
+    			}
+    		}
+    		cv.onmouseup=function(){
+    			cv.onmousemove='';
+    			ctx.beginPath();
+    		}
+    	</script>
+    </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            function promise(){
+                var p1 = new Promise(function(resolve, reject) {
+                    // async code running!!!
+                    setTimeout(function (){
+                        console.log(1);
+                        // resolve('begin');
+                        reject(123);
+                    },1000)
+                });
+                return p1;
+            }
+            promise().then(function (v){
+                setTimeout(function (){
+                    console.log(v);
+                },1000)
+                reject(12)
+                return 2;
+            })
+            .catch(function (err){
+                console.log(err);
+                return 'cat';
+            })
+            .then(function (v) {
+                setTimeout(function (){
+                    console.log(v);
+                },1000)
+                return 3;
+            })
+            .then(function (v) {
+                setTimeout(function (){
+                    console.log(v);
+                },1000)
+                return 4;
+            })
+            .then(function (v) {
+                setTimeout(function (){
+                    console.log(v);
+                },1000)
+                return 5;
+            })
+            .catch(function (err){
+                console.log(err);
+            })
+
+            // tips:
+            // 1.在promise对象中resolve处理成功时返回的内容，后续的then方法中能接收到resolve传过去的数据
+            // 2.在promise对象中reject处理失败时返回的内容，后续的catch方法中能接受到reject传过去的数据
+            // 3.catch方法在promise对象后只能调用一次，之后调用的catch方法不能生效
+            // 4.then方法可以在promise对象后调用无数次
+            // 5.catch方法在promise对象后面调用之后可以继续调用then方法
+        </script>
+    </body>
+</html>

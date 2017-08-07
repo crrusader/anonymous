@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+        <style>
+            .test{
+                color: red;
+                width: 100px;
+                height: 100px;
+                display: block!important;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 任务队列(同步异步区别) -->
+        <input name="input" onkeydown="alert(this.value)" type="text" value="a" />
+        <input name="input" onkeydown="var me = this;setTimeout(function(){alert(me.value)},0)" type="text" value="a" />
+
+        <p id="#app"></p>
+
+        <!-- 延迟对象 -->
+        <button>test deffer</button>
+        <p class="deferInfo">init status!</p>
+        <div class="test"></div>
+        <div class="test"></div>
+        <div class="test"></div>
+        <div class="test"></div>
+        <div class="test"></div>
+    </body>
+
+    <script>
+        // 探索deffer延遲對象
+        $("button").bind("click", function() {
+            $(".deferInfo").append("<br>Started...");
+
+            $(".test").each(function(i) {
+                $(this).fadeIn().fadeOut(1000 * (i + 1));
+            });
+            var  def = $.Deferred(function () {
+                console.log(2);
+            })
+            // 改变延迟对象状态
+            def.reject("abc")
+            $(".test").promise().done(function(){ //一旦绑定的元素状态为完成时，马上触发
+                $(".deferInfo").append("<br>Finished! ");
+                console.log(def.state());
+            });
+        });
+    </script>
+    <script>
+        // load加載外部文本文件，並能執行外部文件js
+        $(function () {
+            $('#app').load('./text.html').promise().done(function () {
+                setTimeout(function () {
+                    // console.log(1);
+                    // console.log(2);
+                },0)
+            });
+        })
+    </script>
+    <!-- <video class="play_video" style="display:none;" id="cc_1C0E489BBC8C9EE69C33DC5901307461" x-webkit-airplay="allow" webkit-playsinline="" playsinline="true" width="300" height="190" src="http://cm14-ccm1-2.play.bokecc.com/flvs/ca/Qx8ao/uldrm6oMT6-10.mp4?t=1496816493&amp;key=CC151DF3B483684FC5A4381D8B4CB60D" controls="controls">您的浏览器不支持html5 video</video> -->
+    <script type="text/javascript">
+        // 播放視頻js代碼
+        (function (window, undefined) {
+            if (window.cc_js_Player) {
+                window.cc_js_Player.showPlayer();
+                return;
+            };
+            var domscript = window.document.createElement("script");
+            domscript.src = "https://p.bokecc.com/js/player/v20170601.js";
+            domscript.onload = domscript.onreadystatechange = function () {
+                if (!domscript.readyState || 'loaded' == domscript.readyState || 'complete' == domscript.readyState) {
+                    window.cc_js_Player.showPlayer();
+                }
+            };
+            var head = document.getElementsByTagName("head")[0] || document.documentElement;head.insertBefore(domscript,head.firstChild );
+        })(window);
+
+    </script>
+</html>

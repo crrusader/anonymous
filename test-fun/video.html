@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+
+        <div>
+            <!-- <object type="" data="https://p.bokecc.com/flash/single/72A2F2B0A81D0411_284AB5A765B97FB59C33DC5901307461_true_B10AC757094341AE_1/player.swf"> -->
+                <embed class="liu-video" id="play_video" src="https://p.bokecc.com/flash/single/72A2F2B0A81D0411_284AB5A765B97FB59C33DC5901307461_true_B10AC757094341AE_1/player.swf"
+                width="600"
+                height="490"
+                name="cc_284AB5A765B97FB59C33DC5901307461"
+                allowfullscreen="true"
+                wmode="transparent"
+                allowscriptaccess="always"
+                pluginspage="http://www.macromedia.com/go/getflashplayer"
+                type="application/x-shockwave-flash"
+                style="display: block;"
+                flashvars="arg=Internet Explorer&arg2=hello"
+                play="false">
+            <!-- </object> -->
+        </div>
+
+        <script type="text/javascript">
+        (function (window, undefined) {
+            if (window.cc_js_Player) {	window.cc_js_Player.showPlayer();	return;	};
+            var domscript = window.document.createElement("script");
+            domscript.src = "https://p.bokecc.com/js/player/v20170601.js";
+            domscript.onload = domscript.onreadystatechange = function () {
+                if (!domscript.readyState || 'loaded' == domscript.readyState || 'complete' == domscript.readyState) {
+                    window.cc_js_Player.showPlayer();
+                }
+            };
+            var head = document.getElementsByTagName("head")[0] || document.documentElement;head.insertBefore(domscript, head.firstChild );
+        })(window);
+
+        </script>
+    </body>
+</html>

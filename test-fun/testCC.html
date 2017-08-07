@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .testCC{
+                width: 100px;
+                height: 100px;
+                background: silver;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="testCC">
+            <!-- <script src="https://p.bokecc.com/player?vid=284AB5A765B97FB59C33DC5901307461&siteid=72A2F2B0A81D0411&autoStart=true&width=600&height=490&playerid=B10AC757094341AE&playertype=1" type="text/javascript"></script> -->
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('.testCC').on('click',function () {
+                    // console.log($(this).find('video'));
+                    var p1 = new Promise(function(resolve, reject) {
+                        // console.log(1);
+                        var obj = document.createElement('script');
+                        obj.src = 'https://p.bokecc.com/player?vid=284AB5A765B97FB59C33DC5901307461&siteid=72A2F2B0A81D0411&autoStart=true&width=300&height=200&playerid=B10AC757094341AE&playertype=1';
+                        obj.type = "text/javascript";
+                        document.querySelector('.testCC').appendChild(obj)
+                        if(!$('.testCC').find('video').length){
+                            var timer = setInterval(function () {
+                                if(!$('.testCC').find('video').length){
+
+                                }else if($('.testCC').find('video').length){
+                                    clearInterval(timer)
+                                    resolve('解析成功')
+                                }
+                            },100)
+                        }else{
+                            reject('解析失败')
+                        }
+                    });
+                    p1.then(function () {
+                        console.log($('.testCC').find('video'))
+                        var vid = $('.testCC').find('video').attr('id');
+                        var player = getSWF(vid);
+                        document.querySelector('#'+vid).play();
+                    })
+                })
+            })
+            function on_cc_player_init( vid, objectID ){
+                var player = getSWF( objectID );
+                console.info( player1 == player );
+                player.start();
+            }
+            function getSWF( swfID ) {
+                if (window.document[ swfID ]) {
+                    return window.document[ swfID ];
+                } else if (navigator.appName.indexOf("Microsoft") == -1) {
+                    if (document.embeds && document.embeds[ swfID ]) {
+                        return document.embeds[ swfID ];
+                    }
+                } else {
+                    return document.getElementById( swfID );
+                }
+            }
+        </script>
+    </body>
+</html>

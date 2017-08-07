@@ -1,0 +1,33 @@
+<html>
+<head>
+<title> New Document </title>
+<meta name="Generator" content="EditPlus">
+<meta name="Author" content="">
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+
+<script >
+
+function zd(u){
+    var a=['top','left'],b=0;
+    u=setInterval(function(){
+        document.getElementsByTagName('body')[0].style[a[b%2]]=(b++)%4<2?0:4;
+        if(b>18){
+            clearInterval(u);b=0
+        }
+    },32)
+}
+</script>
+<script type="text/javascript">
+    (function(){
+        console.log(1);
+    })()
+</script>
+</head>
+
+<body id="win" style='position:relative;' border="1">
+<button onclick="zd()">振动</button>
+
+<div>asdfasdf<div/>
+</body>
+</html>
