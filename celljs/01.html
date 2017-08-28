@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="cell.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+    <script>
+        var el = {
+            $cell: true,
+            style: "font-family: Helvetica; font-size: 14px;",
+            $components: [
+                {
+                    $type: "input",
+                    type: "text",
+                    placeholder: "Type something and press enter",
+                    style: "width: 100%; outline:none; padding: 5px;",
+                    $init: function(e) { this.focus() },
+                    onkeyup: function(e) {
+                        if (e.keyCode === 13) {
+                            document.querySelector("#list")._add(this.value);
+                            this.value = "";
+                        }
+                    }
+                },
+                {
+                    $type: "ul",
+                    id: "list",
+                    _items: [1,2],
+                    onclick:function () {
+                        // alert("123")
+                        toastr.info("Counting: " + (++this._counter))
+                    },
+                    $components: [
+                        {
+                            $type:"li",
+                            id:"list_li",
+                            _items:[66,2],
+                            $text:"456",
+                            style:"color:red"
+                        },
+                        {
+                            $type:"li",
+                            id:"list_li",
+                            _items:[66,2]
+                        }
+                    ],
+                    _add: function(val) { this._items.push(val) },
+                    $update: function() {
+                        this.$components = this._items.map(function(item) {
+                            return { $type: "li", $text: item }
+                        })
+                    }
+                }
+            ]
+        }
+    </script>
+</head>
+<body>
+
+
+</body>
+</html>
